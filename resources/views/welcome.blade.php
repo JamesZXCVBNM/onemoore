@@ -2,10 +2,17 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/images/favicon/site.webmanifest">
+	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Laravel</title>
+	<title>OneMoore</title>
 
 	<link rel="stylesheet" href="{{ mix('css/app.css') }}">
 	<script src="{{ mix('js/app.js') }}" defer></script>
@@ -22,15 +29,32 @@
 		{{-- PAGE TITLE --}}
 		<section class="bg-gray-900 text-white">
 			<div class="container">
-
 				<h1 class="h2">
-					<code class="text-danger">\onemoore > </code>
-					<span class="typed js-typified font-weight-light"></span>
-					{{-- <div id="typed-strings">
-						<p>Hello, world</p>
-						<p>Home</p>
-					</div> --}}
+					<img src="/images/onemoore.png" alt="" srcset="">
 				</h1>
+				<p class="fs--18">
+					Dividend Tracking <span class="mx-2 text-gray-600">|</span> Portfolio Sharing <span class="mx-2 text-gray-600">|</span> &amp; more to come!
+				</p>
+			</div>
+		</section>
+
+		<section class="py-2 bg-light mb-1">
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-10 mx-auto col-lg-4 py-4 text-center">
+
+						<a href="/register" class="btn btn-success my-5">Get started for free</a>
+
+					</div>
+					<div class="col-10 mx-auto col-lg-8 py-5 pb-0-xs text-center-md text-center-xs">
+						<h3>You can try it out for <span class="text-success">free</span>.</h3>
+						<p>Start for free with no card details required! If you find the tool useful, then consider subscribing :) It's only £1 per month or £10 for the whole year!</p>
+					</div>
+
+
+				</div>
 
 			</div>
 		</section>
@@ -119,8 +143,24 @@
 			</div>
 		</section>
 		
+		<section class="bg-gray-900 text-white">
+			<div class="container">
+				<div class="row">
+					<div class="col-6">
+						<h1 class="h2">New Website, Who Dis?</h1>
+						<p class="fs--18">
+							Here's a little about me...
+						</p>
+					</div>
+					<div class="col-3">
+						<img src="/images/whodis.jpg" class="img-thumbnail" width="100%" alt="" srcset="">
+					</div>
+				</div>
+			</div>
+		</section>
+
 		{{-- TECH --}}
-		<section class="py-5 bg-gray-200">
+		<section class="py-5 bg-light">
 			<div class="container">
 				<div class="row text-center-xs">
 					<div class="col-12 col-md-8">
@@ -179,7 +219,7 @@
 				<div class="row">
 					<div class="col-8">
 						<h3 class="m-0 font-weight-light">My Life, abridged.</h3>
-						<p class="mt-3">A timeline of some notable things!</p>
+						<p class="mt-3">The road to becoming a Web Developer was full of twists and turns but was where I was always meant to be</p>
 						<div class="timeline-container mt-5">
 		
 							<div class="d-flex mb-4">
@@ -234,7 +274,7 @@
 		</section>
 
 		{{-- FOOTER --}}
-		<footer id="footer" class="bg-gray-200">
+		<footer id="footer" class="bg-gray-900">
 			{{-- <div class="container">
 
 				<div class="row">

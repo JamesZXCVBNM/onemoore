@@ -1,4 +1,4 @@
-<header id="header" class="bg-dark overlay-dark overlay-opacity-7">
+<header id="header" class="bg-gray-900 ">
 	<div class="container-fluid position-relative">
 		<nav class="navbar navbar-expand-lg navbar-dark justify-content-lg-between justify-content-md-inherit h--70">
 
@@ -177,13 +177,13 @@
 			<ul class="list-inline list-unstyled mb-0 d-flex align-items-end">
 				@guest
 					<li class="nav-item">
-						<a class="nav-link"
-							href="{{ route('login') }}">{{ __('Login') }}</a>
+						<a class="btn btn-primary"
+							href="{{ route('login') }}">Sign In</a>
 					</li>
-					@if(Route::has('register'))
+					@if (Route::has('register'))
 						<li class="nav-item">
-							<a class="nav-link"
-								href="{{ route('register') }}">{{ __('Register') }}</a>
+							<a class="btn btn-primary ml-3"
+								href="{{ route('register') }}">Register</a>
 						</li>
 					@endif
 				@else

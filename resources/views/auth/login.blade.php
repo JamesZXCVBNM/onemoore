@@ -73,15 +73,13 @@
 
 	
 	
-	<div class="row justify-content-center mt-5">
+	{{-- <div class="row justify-content-center mt-5">
 		<div class="col-md-8">
 			<div class="card">
 				<div class="card-header">
 					<h3 class="m-0 font-weight-light">Keeping the lights on. <i class="fas fa-lightbulb text-warning"></i></h3>
 					<p class="mt-3">The <em>minimum</em> monthly costs for providing this service!</p>
 				</div>
-				{{-- <div class="col-12">
-				</div> --}}
 				
 				<div class="card-body border-bottom">
 					<ul class="list-group list-group-flush rounded overflow-hidden">
@@ -157,7 +155,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 
 	   
 	   
