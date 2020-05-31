@@ -11,9 +11,14 @@
         "php": "^7.2.5",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^6.5",
+        "laravel/cashier": "^11.2",
         "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0"
+        "laravel/scout": "^8.0",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.0",
+        "mxl/laravel-queue-rate-limit": "^3.0",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

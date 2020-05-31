@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes(['verify' => true]);
+
+Route::view('/', 'welcome');
+
+Route::middleware(['auth', 'verified'])->group(function() {
+	
+	Route::view('dashboard', 'home');
+
+	Route::get('symbols', 'SymbolController@api');
+
+	Route::post('positions', 'PositionController@store');
+
+	Route::get('my-portfolio', 'UserController@portfolio');
+
 });
+
+
+// Route::get('/home', 'HomeController@index')->name('home');
