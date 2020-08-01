@@ -7,7 +7,7 @@
                 Upgrade
             </a>
             <span class="d-block pt-1 pl-2 pr-2 text-muted text-truncate">
-                Subscribe to add more positions and unlock the ability to share your portfolio! :)
+                Subscribe to add more positions and view shared portfolios
             </span>
         </div>
 

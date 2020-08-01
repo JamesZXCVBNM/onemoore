@@ -2,14 +2,15 @@
 
 namespace App\Jobs;
 
+use App\Models\Dividend;
 use App\Models\Symbol;
-use App\Services\FinnhubService;
-use DateTime;
+use App\Services\EODService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class GetStockDividends implements ShouldQueue
 {
@@ -34,21 +35,17 @@ class GetStockDividends implements ShouldQueue
 	 */
 	public function handle()
 	{
-		$year = date('Y');
-
-		$uri = 'stock/dividend?symbol='.$this->symbol->ticker.'&from='. ($year - 1) .'-01-01&to='. $year .'-01-01';
-		$s = new FinnhubService($uri);
-
-		sleep(3);
+		$uri = 'div/'.$this->symbol->ticker.'.'.$this->symbol->exchange->code.'?from='. (date('Y') - 1) .'-01-01&fmt=json';
+		$s = new EODService($uri);
 
 		$dividends = $s->handle();
 		foreach ($dividends as $d) {
-			$this->symbol->dividends()->create([
+			$this->symbol->dividends()->firstOrCreate([
 				'ex_date' => $d['date'],
-				'pay_date' => $d['payDate'],
-				'record_date' => $d['recordDate'],
-				'declaration_date' => $d['declarationDate'],
-				'amount' => $d['amount'],
+				'pay_date' => $d['paymentDate'] ?: null,
+				'record_date' => $d['recordDate'] ?: null,
+				'declaration_date' => $d['declarationDate'] ?: null,
+				'amount' => $d['value'],
 			]);
 		}
 		$this->symbol->update(['dividends_updated_at' => date('Y-m-d')]);

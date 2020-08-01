@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,36 @@ Route::view('/', 'welcome');
 
 Route::middleware(['auth', 'verified'])->group(function() {
 	
-	Route::view('dashboard', 'home');
+	Route::get('cancel', 'SubscriptionController@destroy'); // TESTING ONLY
 
-	Route::get('symbols', 'SymbolController@api');
+	Route::get('test', function() {
+		return redirect()->route(
+			'cashier.payment',
+			// [$exception->payment->id, 'redirect' => route('home')]
+		);
+	});
+
+	Route::view('dashboard', 'home');
+	Route::view('portfolio', 'portfolio');
+	Route::view('shared-portfolios', 'shared');
+	Route::view('account', 'account')->name('account');
 
 	Route::post('positions', 'PositionController@store');
+	Route::patch('positions/{position}', 'PositionController@update');
+	Route::delete('positions/{position}', 'PositionController@destroy');
 
+
+	Route::get('plans', 'PlanController@index');
+	Route::get('plans/{plan}', 'PlanController@show')->name('plans.show');
+
+	Route::get('subscriptions', 'SubscriptionController@index');
+	Route::post('subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
+	Route::delete('subscriptions/{subscription}', 'SubscriptionController@destroy');
+
+	Route::get('user', 'UserController@show');
+	Route::patch('users/{user}', 'UserController@update');
+
+	Route::get('symbols', 'SymbolController@api');
 	Route::get('my-portfolio', 'UserController@portfolio');
 
 });

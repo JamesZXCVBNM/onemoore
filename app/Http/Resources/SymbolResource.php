@@ -20,7 +20,14 @@ class SymbolResource extends JsonResource
 			'ticker' => $this->ticker,
 			'name' => $this->name,
 			'logo' => $this->logo,
-			'sector' => new SectorResource($this->sector),
+			'quote' => $this->quote,
+			'currency' => $this->currency,
+			'exchange' => $this->whenLoaded('exchange', function() {
+				return new ExchangeResource($this->exchange);
+			}),
+			'sector' => $this->whenLoaded('sector', function() {
+				return new SectorResource($this->sector);
+			}),
 			'dividends' => DividendResource::collection($this->whenLoaded('dividends')),
 		];
 	}

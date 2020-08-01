@@ -10,7 +10,7 @@
 		<div class="clearfix d-flex justify-content-between">
 
 			<!-- Logo : height: 60px max -->
-			<a class="w-100 align-self-center navbar-brand p-3" href="index.html">
+			<a class="w-100 align-self-center navbar-brand p-3" href="/">
 				{{-- OneMoore --}}
 				<img src="{{ asset('images/onemoore.png') }}" width="150" alt="...">
 			</a>
@@ -44,32 +44,34 @@
 					<h6 class="fs--15 mb-1 text-white font-weight-normal">Navigation</h6>
 				</li>
 
-				<li class="nav-item">
-					<a class="nav-link" href="/home">
+				<li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
+					<a class="nav-link" href="/dashboard">
 						<i class="fas fa-fw fa-th-large"></i>
 						<b>Dashboard</b>
 					</a>
 				</li>
 
-				<li class="nav-item">
-					<a class="nav-link" href="/home">
+				<li class="nav-item {{ Request::is('portfolio') ? 'active' : '' }}">
+					<a class="nav-link" href="/portfolio">
 						<i class="fas fa-fw fa-pound-sign"></i>
 						<b>Portfolio</b>
 					</a>
 				</li>
 
-				<li class="nav-item">
-					<a class="nav-link" href="/home">
+				<li class="nav-item {{ Request::is('shared-portfolios') ? 'active' : '' }}">
+					<a class="nav-link" href="/shared-portfolios">
 						<i class="fas fa-fw fa-share-alt"></i>
 						<b>Shared Portfolios</b>
 					</a>
 				</li>
 
 
-				<li class="nav-item">
-					<a class="nav-link" href="#">
+				<li class="nav-item {{ Request::is('account') ? 'active' : '' }}">
+					<a class="nav-link" href="/account">
 						<i class="fas fa-fw fa-user-circle"></i>
-						<span class="badge badge-warning float-end fs--11 mt-1">upgrade</span>
+						@if (!Auth::user()->subscribed())
+							<span class="badge badge-warning float-end fs--11 mt-1">upgrade</span>
+						@endif
 						Account
 					</a>
 

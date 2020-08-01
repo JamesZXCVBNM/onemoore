@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SymbolCollection;
+use App\Http\Resources\SymbolResource;
 use App\Models\Symbol;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,12 @@ class SymbolController extends Controller
 
 	public function api(Request $request)
 	{
-		return Symbol::where('ticker', 'like', $request->query('query').'%')->limit(10)->get();
+		return SymbolResource::collection(
+			Symbol::where('ticker', 'like', $request->query('query').'%')
+				->with('exchange')
+				->limit(10)
+				->get()
+		);
 	}
 
 	/**

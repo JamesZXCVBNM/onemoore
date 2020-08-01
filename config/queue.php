@@ -91,6 +91,10 @@ return [
 			'allows' => 1,
 			'every' => 3,
 		],
+		'eod' => [
+			'allows' => 1,
+			'every' => 1,
+		],
 	],
 
 ];

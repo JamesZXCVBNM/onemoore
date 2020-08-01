@@ -26965,7 +26965,7 @@ return jQuery;
   }
 })(this);
 
-$.SOW.config.sow__debug_enable = true;
+$.SOW.config.sow__debug_enable = false;
 if(typeof $.SOW.config.autoinit === 'undefined') { $.SOW.config.autoinit = {}; }
 $.SOW.config.autoinit['sow_header'] = ['$.SOW.core.header.init','null', null,false];
 $.SOW.config.autoinit['sow_search_suggest'] = ['$.SOW.core.search_suggest.init','form.js-ajax-search', null,false];

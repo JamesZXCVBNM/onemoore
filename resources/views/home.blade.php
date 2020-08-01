@@ -9,10 +9,24 @@
 	<!-- PAGE TITLE -->
 	<page-title :title="'Dashboard'"></page-title>
 
-	{{-- SUBSCRIBE LINK --}}
-	@include('components.subscribe-link')
+	@if(session()->get('success'))
+		<div class="alert alert-success">
+			{{ session()->get('success') }}
+		</div>
+	@endif
 
-	<div class="row gutters-sm">
+	@if (session('status'))
+		<div class="alert alert-success" role="alert">
+			{{ session('status') }}
+		</div>
+	@endif
+
+	{{-- SUBSCRIBE LINK --}}
+	@if (!Auth::user()->subscribed('default'))
+		@include('components.subscribe-link')
+	@endif
+
+	{{-- <div class="row gutters-sm">
 		<div class="col-12 col-md-6 col-xl-4 mb-3">
 			<div class="bg-white shadow-md text-dark p-5 rounded text-center">
 				<h3 class="fs--20 mt-2">This Month</h3>
@@ -31,141 +45,112 @@
 				<p class="display-5">£55.24</p>
 			</div>
 		</div>
-	</div>
-
-	{{-- PORTFOLIO --}}
-	<b-row class="mb-3">
-		<b-col>
-			<portfolio></portfolio>
-		</b-col>
-	</b-row>
-
-	{{-- PLAN ADVERT --}}
-	<b-row class="mb-3">
-		<b-col>
-			<div class="card b-0 shadow-md shadow-lg-hover h-100">
-
-				<div class="card-body font-weight-light mt--60">
-
-					<div class="d-table">
-						<div class="d-table-cell align-bottom">
-
-							<p class="lead">
-								Upgrade to a paid plan
-							</p>
-							
-							<div class="d-flex mb-3">
-								<div class="badge badge-success badge-soft badge-ico-sm rounded-circle float-start">
-									<i class="fas fa-check"></i>
-								</div>
-								<p class="text-dark font-weight-light mb-0 pl--12 pr--12">
-									Add up to 100 portfolio items
-								</p>
-							</div>
-							<div class="d-flex mb-3">
-								<div class="badge badge-success badge-soft badge-ico-sm rounded-circle float-start">
-									<i class="fas fa-check"></i>
-								</div>
-								<p class="text-dark font-weight-light mb-0 pl--12 pr--12">
-									View shared portfolios
-								</p>
-							</div>
-							
-						</div>
-					</div>
-
-				</div>
-
-				<div class="card-footer bg-transparent b-0">
-					<hr class="border-secondary opacity-2">
-
-					<span class="float-end fs--14 text-gray-500 p-2">
-						only £1/month!
-					</span>
-
-					<a href="#" class="btn btn-sm btn-success">
-						Join now
-					</a>
-				</div>
-
-			</div>
-		</b-col>
-	</b-row>
-
-	{{-- <div class="row mb-3">
-		<div class="col-12">
-			<div class="card">
-				<div class="card-body">
-					<new-position></new-position>
-				</div>
-			</div>
-		</div>
 	</div> --}}
 
+	{{-- <b-row class="my-5">
+		<b-col v-for="i in 12" lg="2">
+			<b-card>
+				@{{ moment('YYYY-' + i + '-01').format('MMM') }}
+			</b-card>
+		</b-col>
+	</b-row> --}}
 
-	<!-- BIG TABLE -->
-	{{-- <section class="rounded mb-3 border">
+	
 
-		<!-- header -->
-		<div class="clearfix fs--18 pt-2 pb-3 mb-3 border-bottom">
+	{{-- BY MONTH LINE CHART --}}
+	<b-card class="my-4">
+		<span class="d-block text-muted text-truncate font-weight-medium mb-3">
+			Dividends By Month
+		</span>
 
-			<a href="#" class="btn btn-sm btn-light rounded-circle chartjs-save float-end m-0 js-chartjsified"
-				title="Add Position" aria-label="Add Position">
-				<i class="fas fa-plus m-0"></i>
-			</a>
+		<by-month-chart v-if="monthlyDividends.length" :data="monthlyDividends"></by-month-chart>
 
-			Your Portfolio
-			<small class="fs--11 text-muted d-block mt-1">MONTHLY REVENUE FOR 2020</small>
+		<table class="table table-bordered table-sm mb-0 mt-3 fs--14 text-center">
+			<thead class="thead-light">
+				<tr>
+					<th v-for="(value, key) in monthlyDividends" v-text="moment().month(key).format('MMM')" class="text-uppercase"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td v-for="(value, key) in monthlyDividends" v-text="value"></td>
+				</tr>
+			</tbody>
+		</table>
+	</b-card>
 
-		</div>
-		<!-- /header -->
-
-		<div class="row gutters-sm">
-			<div class="col-12 mb-5">
-				<div class="position-relative">					
-					<table class="table table-bordered table-active">
-						<thead>
-							<tr>
-								<th>Ticker</th>
-								<th>Name</th>
-								<th>Dividend</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>RDSA.L</td>
-								<td>Royal Dutch Shell</td>
-								<td>£0.96</td>
-							</tr>
-						</tbody>
-					</table>
+	{{-- PORTFOLIO --}}
+	{{-- <b-card class="my-4" body-class="p-0">
+		<div class="portlet">
+			<div class="portlet-body max-h-400 tab-content p-0">
+				<div class="max-h-400 scrollable-vertical scrollable-styled-dark align-self-baseline h-100 max-h-400 w-100">
+					<dividend-table :portfolio="portfolio" class="small"></dividend-table>
 				</div>
 			</div>
 		</div>
+	</b-card> --}}
 
-	</section> --}}
-
-
-	<!-- WIDGETS -->
-	<div class="row gutters-sm">
-		
-		{{-- FEATURES --}}
-		<div class="col-12 col-md-6 col-xl-6 mb-3">
-			<div class="portlet">
-				<div class="portlet-header">
-					<span class="d-block text-muted text-truncate font-weight-medium">
-						Features
-					</span>
-				</div>
-				<div class="portlet-body max-h-500 tab-content">
-					<div class="max-h-500 scrollable-vertical scrollable-styled-dark align-self-baseline h-100 max-h-500 w-100">
-						<task-item border="danger" :task="'Add Position to Portfolio'"></task-item>
-						<task-item border="danger" :task="'Update Position price and quantity'"></task-item>
-						<task-item border="warning" :task="'Open Profiles; allow users to &quot;share&quot; their profiles. Show a list of Open Profiles for users to view.'"></task-item>
-					</div>
+	<b-card>
+		<span class="d-block text-muted text-truncate font-weight-medium mb-3">
+			{{-- This Month --}}
+			<b-form-group label="Month: " label-cols="2">
+				<b-form-select class="form-control form-control-clean" v-model="selectedMonth">
+					<b-form-select-option
+						v-for="i in 12" 
+						:value="i" 
+						v-text="moment().month(i).format('MMM')"
+					></b-form-select-option>
+				</b-form-select>
+			</b-form-group>
+		</span>
+		<div class="portlet">
+			<div class="portlet-body max-h-300 tab-content p-0">
+				<div class="max-h-300 scrollable-vertical scrollable-styled-dark align-self-baseline h-100 max-h-300 w-100">
+					<month-breakdown-table 
+						v-if="selectedMonth && month"
+						:data="month" 
+						:month="selectedMonth"
+					></month-breakdown-table>
 				</div>
 			</div>
 		</div>
-	</div>
+	</b-card>
+
+	<b-row>
+		<b-col>
+			<b-card class="my-4">
+				<span class="d-block text-muted text-truncate font-weight-medium mb-3">
+					Portfolio Diversification
+				</span>
+				<by-sector-pie :chart-data="sectorBreakdown" v-if="sectorBreakdown"></by-sector-pie>
+			</b-card>
+		</b-col>
+		<b-col>
+			<b-card class="my-4">
+				<span class="d-block text-muted text-truncate font-weight-medium mb-3">
+					Portfolio Value
+				</span>
+				<div class="d-flex justify-content-center">
+					<span class="mb-0 mt-3 h3">£</span>
+					<span class="mb-0 display-4" v-text="total"></span>
+				</div>
+			</b-card>
+			<b-card class="my-4">
+				<span class="d-block text-muted text-truncate font-weight-medium mb-3">
+					Portfolio Growth
+				</span>
+				<div class="d-flex justify-content-center">
+					<span class="mb-0 mt-3 h3">£</span>
+					<span class="mb-0 display-4" v-text="growth"></span>
+				</div>
+			</b-card>
+			<b-card class="my-4">
+				<span class="d-block text-muted text-truncate font-weight-medium mb-3">
+					Add To Portfolio
+				</span>
+				{{-- <new-position @saved="positionAdded"></new-position> --}}
+			</b-card>
+		</b-col>
+	</b-row>
 
 @endsection

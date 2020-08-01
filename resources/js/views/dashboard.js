@@ -3,40 +3,76 @@ new Vue({
 	data: {
 		search: '',
 		portfolio: [],
-		visibleRows: [],
-		tables: {
-			portfolio: {
-				fields: [
-					{ key: 'logo', label: '', class: 'w--1' },
-					{ key: 'symbol.ticker', label: 'Ticker', class: '' },
-					{ key: 'quantity', label: 'Units' },
-					{ key: 'monthly.month1.total', label: 'JAN', class: 'w--1' },
-					{ key: 'monthly.month2.total', label: 'FEB', class: 'w--1' },
-					{ key: 'monthly.month3.total', label: 'MAR', class: 'w--1' },
-					{ key: 'monthly.month4.total', label: 'APR', class: 'w--1' },
-					{ key: 'monthly.month5.total', label: 'MAY', class: 'w--1' },
-					{ key: 'monthly.month6.total', label: 'JUN', class: 'w--1' },
-					{ key: 'monthly.month7.total', label: 'JUL', class: 'w--1' },
-					{ key: 'monthly.month8.total', label: 'AUG', class: 'w--1' },
-					{ key: 'monthly.month9.total', label: 'SEP', class: 'w--1' },
-					{ key: 'monthly.month10.total', label: 'OCT', class: 'w--1' },
-					{ key: 'monthly.month11.total', label: 'NOV', class: 'w--1' },
-					{ key: 'monthly.month12.total', label: 'DEC', class: 'w--1' },
-				]
+		monthlyDividends: [],
+		sectorBreakdown: [],
+		// barChartData: [],
+		selectedMonth: moment().month()
+	},
+	computed: {
+		total() {
+			let t = 0
+			this.portfolio.forEach(x => t += (x.converted_quote * x.quantity))
+			return t.toFixed(2)
+		},
+		growth() {
+			let t = 0
+			this.portfolio.forEach(x => t += (x.converted_cost * x.quantity))
+			return (this.total - t).toFixed(2)
+		},
+		month() {
+			let data = []
+			for (let i = 0; i < 12; i++) {		
+				this.portfolio.forEach(position => {
+					if (position.monthly['month' + (i + 1)]) {
+						if (i == this.selectedMonth) data.push(position)
+					}
+				})
 			}
+			return data
 		}
 	},
-	// computed: {
-	// },
-	// methods: {
-	// 	total(col) {
-	// 		let map = this.visibleRows.map(x => x.monthly[col] ? x.monthly[col].total : 0)
-	// 		return map.reduce((accum, x) => accum + parseFloat(x), 0.00)
-	// 	},
-	// },
-	// created() {
-	// 	axios.get('/my-portfolio').then(response => {
-	// 		this.portfolio = response.data.data
-	// 	})
-	// }
+	methods: {
+		loadPortfolio() {
+			this.loadingPortfolio = true
+			return axios.get('/my-portfolio').then(response => {
+				this.portfolio = response.data.data
+				this.loadingPortfolio = false
+				this.getMonthlyDividends()
+				this.getValueBySector()
+			})
+		},
+		getMonthlyDividends() {
+			let months = []
+			// let data = []
+			for (let i = 0; i < 12; i++) {		
+				let total = 0
+				this.portfolio.forEach(position => {
+					if (position.monthly['month' + (i + 1)]) {
+						total += position.monthly['month' + (i + 1)].user_currency
+						// if (i == 5) data.push(position)
+					}
+				})
+				months[i] = total.toFixed(2)
+			}
+			this.monthlyDividends = months
+			// this.barChartData = data
+		},
+		getValueBySector() {
+			let sectors = {}
+			this.portfolio.forEach(position => {
+				if (position.industry) {
+					sectors[position.industry.name] = 0
+				} 
+			})
+			this.portfolio.forEach(position => {
+				if (position.industry) {
+					sectors[position.industry.name] += (position.converted_quote * position.quantity)
+				} 
+			})
+			this.sectorBreakdown = sectors
+		}
+	},
+	created() {
+		this.loadPortfolio()	
+	}
 })

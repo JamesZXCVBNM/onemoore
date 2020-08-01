@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
+use Laravel\Cashier\Subscription;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -17,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'email', 'password',
+		'name', 'email', 'password', 'is_shared', 'currency',
 	];
 
 	/**
@@ -40,11 +41,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
 	public function portfolio()
 	{
-		return $this->hasMany(UserSymbol::class);
+		return $this->hasMany(Position::class);
 	}
 
 	public function symbols()
 	{
-		return $this->hasManyThrough(Symbol::class, UserSymbol::class);
+		return $this->hasManyThrough(Symbol::class, Position::class);
+	}
+
+	public function positions()
+	{
+		return $this->hasMany(Position::class);
 	}
 }

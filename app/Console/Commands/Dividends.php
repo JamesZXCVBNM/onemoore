@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\GetStockDividends;
 use App\Models\Dividend;
 use App\Models\Symbol;
-use App\Services\FinnhubService;
+use App\Services\EODService;
 use Illuminate\Console\Command;
 
 class Dividends extends Command
@@ -40,23 +41,25 @@ class Dividends extends Command
 	 */
 	public function handle()
 	{
-		$year = date('Y');
-		$symbols = Symbol::needsDividends()->get();
-		foreach ($symbols as $s) {
-			$uri = 'stock/dividend?symbol='.$s->ticker.'&from='. ($year - 1) .'-01-01&to='. $year .'-01-01';
-			$service = new FinnhubService($uri);
-			$dividends = $service->handle();
-			foreach ($dividends as $d) {
-				$s->dividends()->create([
-					'ex_date' => $d['date'],
-					'pay_date' => $d['payDate'],
-					'record_date' => $d['recordDate'],
-					'declaration_date' => $d['declarationDate'],
-					'amount' => $d['amount'],
-				]);
-			}
-			$s->update(['dividends_updated_at' => date('Y-m-d')]);
-		}
+		// $s = Symbol::find(4318);
+		// $uri = 'div/'.$s->ticker.'.'.$s->exchange->code.'?from='. (date('Y') - 1) .'-01-01&fmt=json';
+		// $service = new EODService($uri);
+		// $dividends = $service->handle();
+		// // dd($dividends);
+		// foreach ($dividends as $d) {
+		// 	$s->dividends()->create([
+		// 		'ex_date' => $d['date'],
+		// 		'pay_date' => $d['paymentDate'],
+		// 		'record_date' => $d['recordDate'],
+		// 		'declaration_date' => $d['declarationDate'],
+		// 		'amount' => $d['value'],
+		// 	]);
+		// }
+		// $s->update(['dividends_updated_at' => date('Y-m-d')]);
 
+		$symbols = Symbol::needsDividends()->with('exchange')->get();
+		foreach ($symbols as $s) {
+			GetStockDividends::dispatch($s)->onQueue('eod');
+		}
 	}
 }

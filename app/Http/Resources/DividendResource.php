@@ -17,7 +17,7 @@ class DividendResource extends JsonResource
 	{
 		return [
 			// 'symbol_id' => $this->symbol_id,
-			// 'ex_date' => $this->ex_date,
+			'ex_date' => $this->ex_date,
 			'pay_date' => $this->pay_date,
 			// 'record_date' => $this->record_date,
 			// 'declaration_date' => $this->declaration_date,

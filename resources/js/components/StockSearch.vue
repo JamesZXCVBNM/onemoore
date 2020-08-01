@@ -1,18 +1,21 @@
 <template>
 	<div>
-		<b-form-group description="search and then click the stock in the results below">
-			<b-input-group>
-				<b-form-input ref="searchField" v-model="value" placeholder="Search by Ticker (e.g. AAPL, AZN.L)" autofocus></b-form-input>
-				<b-input-group-append>
-					<b-button @click="search">Search</b-button>
-				</b-input-group-append>
+		<b-form-group description="search and then click the stock in the results below"  class="mb-0">
+			<b-input-group  class="mb-0">
+				<b-input-group-prepend>
+					<b-input-group-text>
+						<i class="fas fa-spinner fa-spin" v-if="loading && value"></i>
+						<i class="fas fa-search" v-else></i>
+					</b-input-group-text>
+				</b-input-group-prepend>
+				<b-form-input ref="searchField" v-model="value" placeholder="Search by Ticker (e.g. AAPL, AZN)" autofocus></b-form-input>
 			</b-input-group>
 		</b-form-group>
 		<b-table 
 			:items="results"
 			:fields="fields"
 			thead-class="hide"
-			class="cursor-pointer"
+			class="cursor-pointer mb-0"
 			hover
 			outlined
 			@row-clicked="select"
@@ -27,9 +30,10 @@
 export default {
 	data() {
 		return {
+			loading: false,
 			value: null,
 			results: [],
-			fields: [{key: 'logo'}, {key: 'ticker'}, {key: 'name'}],
+			fields: [{key: 'logo'}, {key: 'ticker'}, {key: 'name'}, {key: 'exchange.code'}],
 		}
 	},
 	watch: {
@@ -40,12 +44,14 @@ export default {
 	methods: {
 		search: _.debounce(function() {
 			if (this.value) {
+				this.loading = true
 				axios.get(`/symbols`, {
 					params: {
 						query: this.value
 					}
 				}).then(response => {
-					this.results = response.data
+					this.results = response.data.data
+					this.loading = false
 				})
 			}
 		}, 250),
@@ -53,7 +59,7 @@ export default {
 			this.$emit('selected', row)
 		}
 	},
-	created() {
+	mounted() {
 		this.$refs.searchField.focus()
 	}
 }

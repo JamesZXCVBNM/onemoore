@@ -73,7 +73,7 @@
 							Logo : height: 70px max
 						-->
 						<a class="navbar-brand px-4 w-auto" href="index.html">
-							<img src="assets/images/logo/logo_dark.svg" width="110" height="70" alt="...">
+							{{-- <img src="assets/images/logo/logo_dark.svg" width="110" height="70" alt="..."> --}}
 						</a>
 
 					</div>
@@ -189,7 +189,7 @@
 				@else
 
 					<!-- messages  d-none d-md-inline-block -->
-					<li class="list-inline-item ml--6 mr--6 dropdown">
+					{{-- <li class="list-inline-item ml--6 mr--6 dropdown">
 
 						<a href="#" id="dropdownMessageOptions"
 							class="btn btn-sm rounded-circle btn-light dropdown-toggle" data-toggle="dropdown"
@@ -364,6 +364,12 @@
 							</a>
 						</div>
 
+					</li> --}}
+
+					<li class="list-inline-item ml--6 mr--6">
+						<span class="btn btn-sm btn-light btn-pill pl--12 pr--12 fs--14 d-none d-sm-inline-block font-weight-medium">
+							Base Currency: <span class="font-weight-bold">GBP</span> 
+						</span>
 					</li>
 
 					<!-- account -->

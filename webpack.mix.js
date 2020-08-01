@@ -13,5 +13,10 @@ const mix = require('laravel-mix');
 
 mix
 	.js('resources/js/app.js', 'public/js')
+	.js('resources/js/views/home', 'public/js')
 	.js('resources/js/views/dashboard', 'public/js')
+	.js('resources/js/views/portfolio', 'public/js')
+	.js('resources/js/views/plans', 'public/js')
+	.js('resources/js/views/account', 'public/js')
+	.js('resources/js/views/shared', 'public/js')
 	.sass('resources/sass/app.scss', 'public/css');
