@@ -16,7 +16,7 @@ class UserResource extends JsonResource
 	{
 		return [
 			'id' => $this->id,
-			'name' => $this->name,
+			'username' => $this->username,
 			'is_shared' => $this->is_shared,
 			'currency' => $this->currency,
 			'portfolio' => PositionResource::collection($this->whenLoaded('portfolio')),

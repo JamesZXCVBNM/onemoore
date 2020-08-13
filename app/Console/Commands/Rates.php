@@ -42,20 +42,17 @@ class Rates extends Command
 	 */
 	public function handle()
 	{
-		$start = new DateTime('2018-01-01');
-		$end = new DateTime('2019-01-01');
-		$interval = new DateInterval('P1D');
-		$period = new DatePeriod($start, $interval, $end);
+		// $start = new DateTime('2020-06-06');
+		// $end = new DateTime('2020-08-07');
+		// $interval = new DateInterval('P1D');
+		// $period = new DatePeriod($start, $interval, $end);
 
-		foreach ($period as $date) {
-			$date = $date->format('Y-m-d');
-			GetExchangeRates::dispatch($date);
-		}
+		// foreach ($period as $date) {
+		// 	$date = $date->format('Y-m-d');
+		// 	GetExchangeRates::dispatch($date);
+		// }
 
-		// $date = $this->argument('date') ?: date('Y-m-d');
-		// GetExchangeRates::dispatch($date);
-		
-		// $service = new FixerService();
-		// $response = $service->handle($date);
+		$date = $this->argument('date') ?: date('Y-m-d');
+		GetExchangeRates::dispatch($date);
 	}
 }

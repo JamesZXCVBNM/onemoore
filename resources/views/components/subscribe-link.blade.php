@@ -2,7 +2,7 @@
     <div class="bg-white shadow-xs fs--16 p-2 row-pill">
 
         <div class="clearfix bg-light p-2 rounded row-pill">
-            <a href="#!" title="Upgrade" aria-label="Upgrade"
+            <a href="/plans" title="Upgrade" aria-label="Upgrade"
                 class="btn btn-pill btn-sm btn-success py-1 mb-0 float-start transition-hover-end">
                 Upgrade
             </a>

@@ -10,14 +10,6 @@
 
 <page-title :title="'Account'"></page-title>
 
-@if (sizeof(Auth::user()->subscriptions))
-	{{-- <p>You're Subscribed! <i class="far fa-smile"></i></p> --}}
-@else
-
-	@include('components.subscribe-link')
-
-@endif
-
 <b-card no-body v-cloak>
 	<b-tabs vertical card pills active-nav-item-class="bg-secondary text-white" nav-wrapper-class="bg-light">
 	

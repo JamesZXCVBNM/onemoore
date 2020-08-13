@@ -17,7 +17,7 @@ class SymbolController extends Controller
 	public function api(Request $request)
 	{
 		return SymbolResource::collection(
-			Symbol::where('ticker', 'like', $request->query('query').'%')
+			Symbol::where('ticker', 'LIKE', $request->query('query').'%')
 				->with('exchange')
 				->limit(10)
 				->get()
@@ -63,7 +63,7 @@ class SymbolController extends Controller
 	 */
 	public function show(Symbol $symbol)
 	{
-		//
+		return $symbol->load('dividends', 'sector', 'sector.industry');
 	}
 
 	/**

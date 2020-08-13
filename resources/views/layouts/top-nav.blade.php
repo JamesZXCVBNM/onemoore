@@ -43,7 +43,7 @@
 					visibility : mobile only
 				-->
 				<a class="navbar-brand d-inline-block d-lg-none" href="index.html">
-					<img src="https://picsum.photos/110/60" width="110" height="60" alt="...">
+					<img src="/images/onemoore.png" width="110" alt="...">
 				</a>
 
 
@@ -80,7 +80,7 @@
 					<!-- /MOBILE MENU NAVBAR -->
 					
 					<!-- Dropdowns -->
-					<ul class="navbar-nav align-items-center">
+					{{-- <ul class="navbar-nav align-items-center">
 
 						<!--  -->
 						<li class="nav-item dropdown">
@@ -165,7 +165,7 @@
 							</a>
 
 						</li>
-					</ul>
+					</ul> --}}
 					<!-- /Dropdowns -->
 					
 				</div>
@@ -367,9 +367,9 @@
 					</li> --}}
 
 					<li class="list-inline-item ml--6 mr--6">
-						<span class="btn btn-sm btn-light btn-pill pl--12 pr--12 fs--14 d-none d-sm-inline-block font-weight-medium">
+						<a href="/account" class="btn btn-sm btn-light btn-pill pl--12 pr--12 fs--14 d-none d-sm-inline-block font-weight-medium">
 							Base Currency: <span class="font-weight-bold">GBP</span> 
-						</span>
+						</a>
 					</li>
 
 					<!-- account -->
@@ -393,21 +393,21 @@
 							<div class="dropdown-header fs--14 py-4">
 
 								<!-- profile image -->
-								<div class="w--60 h--60 rounded-circle bg-light bg-cover float-start"
-									style="background-image:url('https://picsum.photos/60/60')">
+								<div class="w--60 h--60 rounded-circle bg-light bg-cover float-start text-center pt-3">
+									<h5>{{ Auth::user()->name[0] }}</h5>
 								</div>
 
 								<!-- user detail -->
 								<span class="d-block font-weight-medium text-truncate fs--16">{{ Auth::user()->name }}</span>
 								<span
 									class="d-block text-muted font-weight-medium text-truncate">{{ Auth::user()->email }}</span>
-								<small class="d-block text-muted"><b>Last Login:</b> 2019-09-03 01:48</small>
+								{{-- <small class="d-block text-muted"><b>Last Login:</b> 2019-09-03 01:48</small> --}}
 
 							</div>
 
 							<div class="dropdown-divider"></div>
 
-							<a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium">
+							{{-- <a href="#!" target="_blank" class="dropdown-item text-truncate font-weight-medium">
 								Notes
 								<small class="d-block text-muted">personal encypted notes</small>
 							</a>
@@ -422,17 +422,17 @@
 								<span class="badge badge-danger float-end font-weight-normal mt-1">1 unpaid</span>
 								Invoices
 								<small class="d-block text-muted">montly billing</small>
-							</a>
+							</a> --}}
 
 							<a href="#!" class="dropdown-item text-truncate font-weight-medium">
 								Account Settings
-								<small class="d-block text-muted">profile, password and more...</small>
+								<small class="d-block text-muted">settings, password and more...</small>
 							</a>
 
-							<a href="#!" class="dropdown-item text-truncate font-weight-medium">
+							{{-- <a href="#!" class="dropdown-item text-truncate font-weight-medium">
 								Upgrade
 								<small class="d-block text-muted">upgrade your account</small>
-							</a>
+							</a> --}}
 
 							<div class="dropdown-divider mb-0"></div>
 

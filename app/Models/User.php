@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'email', 'password', 'is_shared', 'currency',
+		'name', 'username', 'email', 'password', 'is_shared', 'currency',
 	];
 
 	/**
@@ -52,5 +52,10 @@ class User extends Authenticatable implements MustVerifyEmail
 	public function positions()
 	{
 		return $this->hasMany(Position::class);
+	}
+
+	public function scopeShared($query)
+	{
+		return $query->where('is_shared', 1);
 	}
 }

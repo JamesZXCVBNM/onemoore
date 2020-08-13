@@ -31,41 +31,33 @@
 		{{-- PAGE TITLE --}}
 		<section class="bg-gray-900 text-white">
 			<div class="container">
-				<h1 class="h2">
-					<img src="/images/onemoore.png" alt="" srcset="">
-				</h1>
-				<p class="fs--18">
-					Dividend Tracking <span class="mx-2 text-gray-600">|</span> Portfolio Sharing <span class="mx-2 text-gray-600">|</span> &amp; more to come!
-				</p>
+				<b-row>
+					<b-col md="6" sm="12">
+						<h1 class="h2">
+							<img src="/images/onemoore.png" alt="" srcset="">
+						</h1>
+						<p class="fs--18">
+							Dividend Tracking <span class="mx-2 text-gray-600">|</span> Portfolio Sharing <span class="mx-2 text-gray-600">|</span> &amp; more to come!
+						</p>
+					</b-col>
+					<b-col class="text-center">
+						<b-button :href="'/dashboard'" class="m-3 text-center w-33 shadow-light-md" variant="outline-light">
+							<i class="fas fa-sign-in-alt fa-fw fa-2x ml-2"></i><br>Login
+						</b-button>
+						<b-button :href="'/register'" class="m-3 text-center w-33 shadow-light-md" variant="outline-light">
+							<i class="fas fa-user-plus fa-fw fa-2x ml-2"></i><br>Register
+						</b-button>
+					</b-col>
+				</b-row>
 			</div>
 		</section>
 
-		<b-tabs justified card nav-class="h4" content-class="p-3" active-nav-item-class="text-primary">
-			<b-tab title="Dividend Tracking App">
-				<div class="container py-5">
-					<b-row>
-						<b-col>
-							<p>
-								<h6 class="mb-3">
-									...the <u class="text-primary">affordable</u> 
-									Dividend &amp; Portfolio Tracking Tool
-								</h6>
-								{{-- This tool was orignally developed for my personal use. I've spent many, many hours
-								getting it ready to share with the world, so I hope you find it useful too :) --}}
-							</p>
-						</b-col>
-						<b-col class="p-4 text-center">
-							<b-button :href="'/dashboard'" class="m-3 text-center w-25 shadow-danger-md" variant="outline-primary">
-								<i class="fas fa-sign-in-alt fa-fw fa-2x ml-2"></i><br>Login
-							</b-button>
-							<b-button :href="'/register'" class="m-3 text-center w-25 shadow-danger-md" variant="outline-primary">
-								<i class="fas fa-user-plus fa-fw fa-2x ml-2"></i><br>Register
-							</b-button>
-						</b-col>
-					</b-row>
-				</div>
-
-
+		<b-tabs pills justified card content-class="p-3" active-nav-item-class="btn btn-primary rounded-0"  title-item-class="m-3">
+			<b-tab title-item-class="bg-white border-left border-top border-bottom">
+				<template slot="title">					
+					Dividend Tracking App
+				</template>
+	
 				{{-- GET STARTED --}}
 				<section class="py-2 bg-light mb-1 border">
 					<div class="container">
@@ -86,7 +78,7 @@
 				<section>
 					<div class="container">
 						<div class="row">
-							<div class="col-6">
+							<div class="col-md-6">
 								<div class="d-flex mb-4">
 									<div class="text-primary">
 										<i class="fas fa-calendar-alt fa-fw fa-2x"></i>
@@ -116,18 +108,50 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-6">
-								<img src="/images/screenshot.png" class="img-thumbnail" width="100%" alt="" srcset="">
+							<div class="col-md-6">
+								<img src="/images/dashboard-screenshot.png" class="img-thumbnail" width="100%" alt="app preview">
 							</div>
 						</div>
 					</div>
+				</section>
+
+				<section>
+					<div class="">
+						<b-row>
+							<b-col>
+								<b-card body-bg-variant="light">
+									<h5 class="mb-3">Want free money?</h5>
+									<p>Create a Trading 212 Invest account using my referral link and we both get a free share worth up to £100</p>
+									<h6><i class="fas fa-external-link-alt"></i> <a href="https://trading212.com/invite/FfWDmsPz" target="_blank">https://trading212.com/invite/FfWDmsPz </a></h6>
+								</b-card>
+							</b-col>
+							<b-col>
+								<b-card body-bg-variant="light" class="mb-4">
+									<h5 class="mb-3">Or maybe you want to build an app too?</h5>
+									<p>
+										This is where I get my stock data from. It's quite expensive, but cheaper than almost all of the alternatives.
+										You can help me out by subscribing via my referral link: </p>
+									<h6><i class="fas fa-external-link-alt"></i> <a href="https://eodhistoricaldata.com/r/?ref=NAK0Q3Y7" target="_blank">https://eodhistoricaldata.com/r/?ref=NAK0Q3Y7</a></h6>
+								</b-card>
+								<b-card body-bg-variant="light">
+									<h5 class="mb-3">I recommend DigitalOcean!</h5>
+									<p>
+										DigitalOcean makes web hosting super easy. And it's really cheap too! If you use my referral link, you'll get $100 free
+										credit for your first 60 days.
+									</p>
+									<h6><i class="fas fa-external-link-alt"></i> <a href="https://m.do.co/c/aa561441e197" target="_blank">https://m.do.co/c/aa561441e197</a></h6>
+								</b-card>
+							</b-col>
+						</b-row>
+					</div>
+
 				</section>
 		
 				{{-- K££PING TH£ LIGHTS ON --}}
 				<section class="bg-light border">
 					<div class="container">
 						<div class="row">
-							<div class="col-7">
+							<div class="col-lg-7">
 								<h3 class="m-0 font-weight-light">Keeping the lights on. <i class="fas fa-lightbulb text-warning"></i></h3>
 								<p class="mt-3">The <em>minimum</em> monthly costs for providing this service!</p>
 								<ul class="list-group list-group-flush rounded overflow-hidden bg-light">
@@ -198,7 +222,7 @@
 									users for me to break even!</p>
 							
 							</div>
-							<div class="col-5">
+							<div class="col-lg-5">
 								<div class="text-center mt-5">
 									<p class="py-5 display-5 text-gray-300">
 										Because it's good to be transparent. <br>
@@ -211,7 +235,7 @@
 				</section>
 			</b-tab>
 
-			<b-tab title="About Me">
+			<b-tab title="About Me" title-item-class="bg-white border-left border-right border-top border-bottom">
 				<section>
 					<div class="container">
 						<div class="row">
@@ -239,12 +263,12 @@
 				</section>
 		
 				{{-- TECH --}}
-				<section class="py-5 bg-light">
+				<section class="py-5 bg-light border">
 					<div class="container">
 						<div class="row text-center-xs">
 							<div class="col-12 col-md-8">
-								<h3 class=" font-weight-light">Things I'm good at!</h3>
-								<p class="m-0">These are the things that I use on a daily basis. 
+								<h3 class=" font-weight-light">Tools of the trade</h3>
+								<p class="m-0">These are the technologies that I use on a daily basis. 
 									For those that are interested; this website is developed using 
 									these frameworks, tools &amp; technologies.</p>
 							</div>
@@ -439,6 +463,30 @@
 						</div>
 					</div>
 				</section>
+			</b-tab>
+
+			<b-tab title="Blog" title-item-class="bg-white border-right border-top border-bottom">
+				<div class="container text-center">
+					<p class="my-5 display-5">Under Construction!</p>
+					
+					<p class="my-5 h4">
+						<span class="badge badge-primary badge-pill">Personal Finance</span>
+						<span class="badge badge-warning badge-pill">Investing Experiences</span>
+						<span class="badge badge-success badge-pill">Web Development</span>
+						<span class="badge badge-danger badge-pill">Random Rants &amp; stream of consciousness</span>
+					</p>
+
+					<p class="my-5">I have loads of articles planned, I just need to build the blog component.</p>
+
+				</div>
+			</b-tab>
+
+			<b-tab title="Other Tools" title-item-class="bg-white border-right border-top border-bottom">
+				<div class="container text-center">
+					<p class="display-4 my-5 py-5">Huh... nothing here. Yet.</p>
+					<p>There are a few other tools I'm working on. A couple of handy calculators, etc. 
+						I <strong>will</strong> finish them eventually. Promise!</p>
+				</div>
 			</b-tab>
 		</b-tabs>
 

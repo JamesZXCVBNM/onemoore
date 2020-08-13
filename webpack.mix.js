@@ -19,4 +19,5 @@ mix
 	.js('resources/js/views/plans', 'public/js')
 	.js('resources/js/views/account', 'public/js')
 	.js('resources/js/views/shared', 'public/js')
+	.js('resources/js/views/stocks', 'public/js')
 	.sass('resources/sass/app.scss', 'public/css');

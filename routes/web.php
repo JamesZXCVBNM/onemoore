@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
 	Route::view('dashboard', 'home');
 	Route::view('portfolio', 'portfolio');
 	Route::view('shared-portfolios', 'shared');
+	Route::view('stocks', 'stocks');
 	Route::view('account', 'account')->name('account');
 
 	Route::post('positions', 'PositionController@store');
@@ -50,7 +51,9 @@ Route::middleware(['auth', 'verified'])->group(function() {
 	Route::patch('users/{user}', 'UserController@update');
 
 	Route::get('symbols', 'SymbolController@api');
+	Route::get('symbols/{symbol}', 'SymbolController@show');
 	Route::get('my-portfolio', 'UserController@portfolio');
+	Route::get('users/shared', 'UserController@shared');
 
 });
 

@@ -6,5 +6,6 @@
     "/js/home.js": "/js/home.js",
     "/js/plans.js": "/js/plans.js",
     "/js/portfolio.js": "/js/portfolio.js",
-    "/js/shared.js": "/js/shared.js"
+    "/js/shared.js": "/js/shared.js",
+    "/js/stocks.js": "/js/stocks.js"
 }

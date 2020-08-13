@@ -65,6 +65,12 @@
 					</a>
 				</li>
 
+				<li class="nav-item {{ Request::is('stocks') ? 'active' : '' }}">
+					<a class="nav-link" href="/stocks">
+						<i class="fas fa-fw fa-search-dollar"></i>
+						<b>Stock Search &amp; Info</b>
+					</a>
+				</li>
 
 				<li class="nav-item {{ Request::is('account') ? 'active' : '' }}">
 					<a class="nav-link" href="/account">

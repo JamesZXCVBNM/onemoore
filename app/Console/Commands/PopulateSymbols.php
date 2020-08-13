@@ -39,10 +39,6 @@ class PopulateSymbols extends Command
 	 */
 	public function handle()
 	{
-		// $s = new FinnhubService('stock/profile2?symbol=PRIU.L');
-		// $json = $s->handle();
-		// dd(count(array_keys($json)));
-
 		$stocks = Symbol::whereNull('sector_id')->get();
 		foreach ($stocks as $stock) {
 			GetStockDetails::dispatch($stock)->onQueue('finnhub');

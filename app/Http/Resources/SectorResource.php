@@ -17,6 +17,7 @@ class SectorResource extends JsonResource
 		return [
 			'id' => $this->id,
 			'name' => $this->name,
+			'industry' => $this->industry->name
 		];
 	}
 }
